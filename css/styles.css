@@ -1,18 +1,15 @@
-
 :root {
   --radius: 20px;
   --text-light: #1e1e1e;
   --text-dark: #e6edf3;
 
   --bg-light: #e9ebe6;
-  --glass-light: rgba(255, 255, 255, 0.50); /* G2 */
+  --glass-light: rgba(255, 255, 255, 0.5); /* G2 */
   --glass-border-light: rgba(180, 185, 178, 0.6);
-
 
   --bg-dark: #0d1117;
   --glass-dark: rgba(22, 27, 34, 0.45); /* G2 */
   --glass-border-dark: rgba(48, 54, 61, 0.8);
-
 
   --btn: #1f6feb;
   --btn-hover: #58a6ff;
@@ -81,7 +78,7 @@ h1 {
 input,
 button {
   padding: 12px 14px;
-  font-size: 17px; 
+  font-size: 17px;
   margin: 6px 6px;
   border-radius: var(--radius);
   border: 1px solid var(--glass-border-light);
@@ -276,6 +273,122 @@ button:active {
   animation-delay: 0.4s;
 }
 
+.sunny,
+.cloudy,
+.overcast,
+.rainy,
+.night {
+  transition: background-image 1s ease;
+}
+
+/* ======== FONDOS ANIMADOS POR CLIMA ======== */
+
+/* ☀️ SOLEADO – Sol radiante */
+.sunny {
+  background: radial-gradient(circle at center, #ffe27a, #f5b041 60%, #d68910);
+  animation: sunnyGlow 4s infinite alternate ease-in-out;
+}
+@keyframes sunnyGlow {
+  0% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(1.25);
+  }
+}
+
+/* ☁️ NUBLADO – Nubes moviéndose */
+.cloudy {
+  background: linear-gradient(135deg, #cfd2d4, #878b8e);
+  overflow: hidden;
+}
+.cloudy::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='800' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='200' cy='150' rx='200' ry='80' fill='%23ffffff55'/%3E%3Cellipse cx='500' cy='170' rx='220' ry='90' fill='%23ffffff55'/%3E%3Cellipse cx='350' cy='120' rx='240' ry='100' fill='%23ffffff55'/%3E%3C/svg%3E");
+  background-size: 200% 100%;
+  animation: cloudsMove 14s linear infinite;
+  opacity: 0.7;
+}
+@keyframes cloudsMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* 🌥️ CUBIERTO – Oscuro con neblina */
+.overcast {
+  background: linear-gradient(135deg, #7f8c8d, #4b4e4f);
+}
+.overcast::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #ffffff22 0%, #00000088 80%);
+  animation: fogMove 6s infinite alternate ease-in-out;
+}
+@keyframes fogMove {
+  0% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(10px);
+  }
+}
+
+/* 🌧️ LLUVIA – Gotas cayendo */
+.rainy {
+  background: linear-gradient(135deg, #5dade2, #2e86c1);
+  overflow: hidden;
+}
+.rainy::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 18px,
+    rgba(255, 255, 255, 0.6) 20px
+  );
+  animation: rainFall 0.38s linear infinite;
+  opacity: 0.55;
+}
+@keyframes rainFall {
+  0% {
+    background-position-y: 0;
+  }
+  100% {
+    background-position-y: 40px;
+  }
+}
+
+/* 🌙 NOCHE – Estrellas animadas */
+.night {
+  background: linear-gradient(135deg, #0a0a14, #000000);
+  overflow: hidden;
+}
+.night::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #ffffff 1px, transparent 1px) repeat;
+  background-size: 3px 3px;
+  animation: starsTwinkle 2s infinite alternate ease-in-out;
+  opacity: 0.7;
+}
+@keyframes starsTwinkle {
+  0% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
 .fade-in {
   opacity: 0;
   transform: translateY(10px);
@@ -309,5 +422,90 @@ button:active {
   .forecast-day {
     width: 82px;
     font-size: 14px;
+  }
+}
+
+/* ======== MODO OSCURO ANIMADO ======== */
+
+.dark.sunny {
+  background: radial-gradient(circle at center, #ffdd8a, #cfa43f 60%, #8a651e);
+  animation: sunnyGlow 4s infinite alternate ease-in-out;
+}
+
+.dark.cloudy {
+  background: linear-gradient(135deg, #9ca0a2, #5e6061);
+}
+.dark.cloudy::before {
+  opacity: 0.6;
+  animation-duration: 10s; /* nubes más rápidas en dark */
+}
+
+.dark.overcast {
+  background: linear-gradient(135deg, #555657, #2b2c2c);
+}
+.dark.overcast::before {
+  opacity: 0.9;
+  animation-duration: 4s; /* neblina más intensa */
+}
+
+.dark.rainy {
+  background: linear-gradient(135deg, #3b6c91, #1c4362);
+}
+.dark.rainy::before {
+  opacity: 0.7;
+  animation-duration: 0.28s; /* lluvia más intensa en dark */
+}
+
+.dark.night {
+  background: linear-gradient(135deg, #03030a, #000000);
+}
+.dark.night::before {
+  opacity: 0.9;
+  animation-duration: 1.8s; /* estrellas parpadean un poco más rápido */
+}
+
+/* ⚡ TORMENTA – Fondo oscuro + relámpagos */
+.thunderstorm {
+  background: linear-gradient(135deg, #1c2833, #0a0a0c);
+  overflow: hidden;
+}
+
+/* Lluvia encima */
+.thunderstorm::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 18px,
+    rgba(255, 255, 255, 0.5) 20px
+  );
+  opacity: 0.45;
+  animation: rainFall 0.3s linear infinite;
+}
+
+/* Relámpagos */
+.thunderstorm::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.9);
+  opacity: 0;
+  animation: lightningFlash 4s infinite;
+}
+
+@keyframes lightningFlash {
+  0%,
+  9%,
+  11%,
+  14%,
+  100% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  13% {
+    opacity: 0.6;
   }
 }

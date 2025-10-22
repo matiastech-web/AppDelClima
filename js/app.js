@@ -63,21 +63,23 @@ function mostrarClima(nombre, clima, humedad) {
   `;
 }
 
-
 function interpretarClima(code) {
   const estados = {
-    0: "Despejado",
-    1: "Mayormente despejado",
-    2: "Parcialmente nublado",
-    3: "Nublado",
-    45: "Neblina",
-    48: "Neblina con escarcha",
-    51: "Llovizna ligera",
-    61: "Lluvia ligera",
-    63: "Lluvia moderada",
-    65: "Lluvia intensa",
-    71: "Nieve ligera",
-    80: "Chaparrones",
+    0: "☀️ Despejado",
+    1: "🌤️ Mayormente despejado",
+    2: "⛅ Parcialmente nublado",
+    3: "☁️ Nublado",
+    45: "🌫️ Neblina",
+    48: "🌫️ Neblina con escarcha",
+    51: "🌦️ Llovizna ligera",
+    61: "🌧️ Lluvia ligera",
+    63: "🌧️ Lluvia moderada",
+    65: "🌧️ Lluvia intensa",
+    71: "❄️ Nieve ligera",
+    80: "🌧️ Chaparrones",
+    95: "⚡ Tormenta",
+    96: "⚡ Tormenta",
+    99: "⚡ Tormenta",
   };
   return estados[code] || "Condición desconocida";
 }
@@ -88,13 +90,17 @@ function cambiarFondo(code) {
     "cloudy",
     "overcast",
     "rainy",
-    "night"
+    "night",
+    "thunderstorm"
   );
+
   if (code === 0) document.body.classList.add("sunny");
   else if (code === 1 || code === 2) document.body.classList.add("cloudy");
   else if (code === 3) document.body.classList.add("overcast");
   else if (code >= 51 && code <= 67) document.body.classList.add("rainy");
   else if (code >= 80 && code <= 82) document.body.classList.add("rainy");
+  else if (code >= 95 && code <= 99)
+    document.body.classList.add("thunderstorm");
   else document.body.classList.add("night");
 }
 
