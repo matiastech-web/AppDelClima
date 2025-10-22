@@ -276,31 +276,6 @@ button:active {
   animation-delay: 0.4s;
 }
 
-.sunny,
-.cloudy,
-.overcast,
-.rainy,
-.night {
-  transition: background-image 1s ease;
-}
-
-.sunny {
-  background: url("https://images.unsplash.com/photo-1501973801540-537f08ccae7b?auto=format&fit=crop&w=1400&q=80") no-repeat center/cover fixed;
-}
-.cloudy {
-  background: url("https://images.unsplash.com/photo-1505575972945-32009b65b64d?auto=format&fit=crop&w=1400&q=80") no-repeat center/cover fixed;
-}
-.overcast {
-  background: url("https://images.unsplash.com/photo-1500336624523-d727130c3328?auto=format&fit=crop&w=1400&q=80") no-repeat center/cover fixed;
-}
-.rainy {
-  background: url("https://images.unsplash.com/photo-1503437313881-503a91226402?auto=format&fit=crop&w=1400&q=80") no-repeat center/cover fixed;
-}
-.night {
-  background: url("https://images.unsplash.com/photo-1500048993959-dc1e9171c8c3?auto=format&fit=crop&w=1400&q=80") no-repeat center/cover fixed;
-}
-
-
 .fade-in {
   opacity: 0;
   transform: translateY(10px);
